@@ -1,0 +1,26 @@
+{
+  "name": "reactjs-flickr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "enclave",
+    "build": "node node_modules/enclave/src/build.js",
+    "enclave-eject": "node node_modules/enclave/src/eject/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kddial/reactjs-flickr.git"
+  },
+  "author": "Kevin Dial",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kddial/reactjs-flickr/issues"
+  },
+  "homepage": "https://github.com/kddial/reactjs-flickr#readme",
+  "dependencies": {
+    "enclave": "^0.9.1",
+    "react-router": "^2.0.1"
+  }
+}
