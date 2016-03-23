@@ -1,5 +1,7 @@
 var React = require('react');
 var Search = require('../components/Search');
+var flickrHelper = require('../utils/flickrHelper');
+
 
 var SearchContainer = React.createClass({
   contextTypes: {
@@ -16,32 +18,16 @@ var SearchContainer = React.createClass({
     });
   },
   handleSubmitQuery: function(e) {
-    // prevent the default action of submit to occur
     e.preventDefault();
+    console.log("loading...");
 
-    // SOME MAGIC GOING ON HERE
+    flickrHelper.getFlickrEcho(this.state.query)
+      .then(function(result) {
+        console.log("flickr echo: " + result);
 
-
-    // cache player one username
-    var username = this.state.username;
-    this.setState({
-      username: ""
-    });
-
-    if (this.props.routeParams.playerOne) {
-      // on playerTwo. Go to /battle
-      this.context.router.push({
-        pathname: '/battle',
-        query: {
-          playerOne: this.props.routeParams.playerOne,
-          playerTwo: this.state.username
-        }
       });
 
-    } else {
-      // on playerOne. Go to /playerTwo
-      this.context.router.push('/playerTwo/' + this.state.username);
-    }
+
   },
   render: function() {
     return (

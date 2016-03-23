@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/kddial/reactjs-flickr#readme",
   "dependencies": {
+    "axios": "^0.9.1",
     "enclave": "^0.9.1",
     "react-router": "^2.0.1"
   }
