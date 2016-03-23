@@ -26,22 +26,6 @@ method=flickr.photos.search
 
 
 var helpers = {
-  getPlayersInfo: function(players) {
-    // fetch some data from github
-
-    return axios.all(players.map(function(username) {
-      return getUserInfo(username)
-
-    })).then(function(info) {
-      return info.map(function(user) {
-        return user.data;
-      });
-
-    }).catch(function(err) {
-      console.warn('Error in getPlayersInfo', err);
-    })
-
-  },
   getFlickrEcho: function(value) {
     var url = flickrAddMethod("flickr.test.echo");
     url = flickrAddArg(url, "name", value);
@@ -49,7 +33,23 @@ var helpers = {
     return axios.get(url)
       .then(function(result) {
         return result.data.name._content;
+      }).catch(function(err) {
+        console.warn('Error in getFlickrEcho', err);
+        return err;
       });
+  }, 
+  getFlickrPhotoSearch: function(value) {
+    var url = flickrAddMethod("flickr.photos.search");
+    url = flickrAddArg(url, "tags", value); // tag search
+    url = flickrAddArg(url, "text", value); // text search
+
+    return axios.get(url)
+      .then(function(result) {
+        return result;
+      }).catch(function(err) {
+        console.warn('Error in getFlickrPhotoSearch', err);
+      });
+
   }
 };
 
