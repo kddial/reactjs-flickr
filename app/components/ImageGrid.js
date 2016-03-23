@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var Loading = require('./Loading');
+var Image = require('./Image');
 
 // Used to puke out preformatted text 
 function puke(object) {
@@ -17,8 +18,11 @@ function ImageGrid (props) {
       return props.isLoading === true
       ? <Loading text={"Fetching images"}/>
       : <div>
-          Image Grid
-          {puke(props)}
+          <div className="row">
+            {props.photos.map(function(imgUrl) {
+              return (<Image url={imgUrl} />);
+            })}
+          </div>
         </div>
     } else {
       return (<div></div>);

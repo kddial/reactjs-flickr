@@ -11,20 +11,6 @@ function flickrAddArg(url, arg, value) {
   return url + "&" + arg + "=" + value;
 }
 
-
-/*
-https://api.flickr.com/services/rest/?method=flickr.test.echo&name=value
-
-https://api.flickr.com/services/rest/?
-method=flickr.photos.search
-&api_key=4b0bdadcb57c0e8bac7dd9fa85d3a8de
-&tags=panda
-&format=json
-&nojsoncallback=1
-&api_sig=a295b347ebe7557e30ae58012648e2f0
-*/
-
-
 var helpers = {
   getFlickrEcho: function(value) {
     var url = flickrAddMethod("flickr.test.echo");
@@ -49,7 +35,20 @@ var helpers = {
       }).catch(function(err) {
         console.warn('Error in getFlickrPhotoSearch', err);
       });
+  },
+  getFlickrPhotoSourceUrl: function(imgObj) {
+    var size = "q" // large square 150x150
+    var url = "https://farm" + imgObj.farm 
+      + ".staticflickr.com/" + imgObj.server 
+      + "/" + imgObj.id + "_" + imgObj.secret 
+      + "_" + size + ".jpg"
 
+    return url
+  },
+  parsePhotoSources: function(photos) {
+    return photos.map(function(imgObj) {
+      return helpers.getFlickrPhotoSourceUrl(imgObj);
+    });
   }
 };
 

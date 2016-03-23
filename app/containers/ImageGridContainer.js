@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var ImageGrid = require('../components/ImageGrid');
+var flickrHelper = require('../utils/flickrHelper');
 
 var ImageGridContainer = React.createClass({
   propTypes: {
@@ -11,12 +12,13 @@ var ImageGridContainer = React.createClass({
   },
   render: function() {
     return (
-      <ImageGrid 
-        beginSearch={this.props.beginSearch}
-        isLoading={this.props.isLoading}
-        photos={this.props.photos}
-        error={this.props.error} />
-
+      <div className="col-md-12">
+        <ImageGrid 
+          beginSearch={this.props.beginSearch}
+          isLoading={this.props.isLoading}
+          photos={flickrHelper.parsePhotoSources(this.props.photos)}
+          error={this.props.error} />
+      </div>
     );
 
   }

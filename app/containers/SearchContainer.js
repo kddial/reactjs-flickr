@@ -46,7 +46,7 @@ var SearchContainer = React.createClass({
 
     flickrHelper.getFlickrPhotoSearch(this.state.query)
       .then(function(result) {
-        console.log(result);
+        console.log(result.data.photos.photo);
         this.setState({
           isLoading: false,
           photos: result.data.photos.photo
