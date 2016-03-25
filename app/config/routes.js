@@ -6,13 +6,13 @@ var IndexRoute = ReactRouter.IndexRoute;
 var hashHistory = ReactRouter.hashHistory;
 var Main = require('../components/Main');
 var Home = require('../components/Home');
-var Test = require('../components/Test');
+var ImageView = require('../components/ImageView');
 
 var routes = (
   <Router history={hashHistory}>
     <Route path='/' component={Main}>
       <IndexRoute component={Home} />
-      <Route path='test' component={Test} />
+      <Route path='image/:image_id' component={ImageView} />
     </Route>
   </Router>
 );

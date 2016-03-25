@@ -49,7 +49,8 @@ var helpers = {
   },
   parsePhotoSources: function(photos) {
     return photos.map(function(imgObj) {
-      return helpers.getFlickrPhotoSourceUrl(imgObj);
+      imgObj.url = helpers.getFlickrPhotoSourceUrl(imgObj)
+      return imgObj;
     });
   }
 };
