@@ -11,7 +11,7 @@ function puke(object) {
 
 function ImageGrid (props) {
   if (props.error) {
-    return (<div> Error occured. Check network connection and retry. </div>);
+    return (<div> Error occured. Do not leave input field blank or check network connection and try again. </div>);
 
   } else {
     if (props.beginSearch) {
@@ -20,7 +20,7 @@ function ImageGrid (props) {
       : <div>
           <div className="row">
             {props.photos.map(function(imgUrl) {
-              return (<Image url={imgUrl} />);
+              return (<Image key={imgUrl} url={imgUrl} />);
             })}
           </div>
         </div>

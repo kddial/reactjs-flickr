@@ -2,15 +2,41 @@ var React = require('react');
 var Search = require('../components/Search');
 var flickrHelper = require('../utils/flickrHelper');
 var ImageGridContainer = require('../containers/ImageGridContainer');
+var SortByMenuContainer = require('../containers/SortByMenuContainer');
 
 
 var SearchContainer = React.createClass({
   contextTypes: {
     router: React.PropTypes.object.isRequired
   },
+  photoSearch: function(sortOption) {
+
+    this.setState({
+      beginSearch: true,
+      isLoading: true,
+      error: false
+    })
+
+    flickrHelper.getFlickrPhotoSearch(this.state.query, sortOption.id)
+      .then(function(result) {
+        this.setState({
+          isLoading: false,
+          photos: result.data.photos.photo
+        })
+      }.bind(this))
+      .catch(function(err) {
+        this.setState({
+          error: true
+        });
+      }.bind(this));
+  },
   getInitialState: function() {
     return {
-      query: '',
+      query: "",
+      sortOption: {
+        id: "relevance",
+        title: "Relevance"
+      },
       beginSearch: false,
       isLoading: true,
       error: false,
@@ -38,27 +64,16 @@ var SearchContainer = React.createClass({
   handleSubmitQuery: function(e) {
     e.preventDefault();
 
+    this.photoSearch(this.state.sortOption);
+  },
+  handleUpdateSortOption: function(chosenSortOption) {
     this.setState({
-      beginSearch: true,
-      isLoading: true,
-      error: false
-    })
+      sortOption: chosenSortOption
+    });
 
-    flickrHelper.getFlickrPhotoSearch(this.state.query)
-      .then(function(result) {
-        console.log(result.data.photos.photo);
-        this.setState({
-          isLoading: false,
-          photos: result.data.photos.photo
-        })
-      }.bind(this))
-      .catch(function(err) {
-        this.setState({
-          error: true
-        });
-      }.bind(this));
-
-
+    if (this.state.beginSearch) {
+      this.photoSearch(chosenSortOption);
+    }
   },
   render: function() {
     return (
@@ -67,6 +82,9 @@ var SearchContainer = React.createClass({
           onSubmitQuery={this.handleSubmitQuery}
           onUpdateQuery={this.handleUpdateQuery}
           query={this.state.query} />
+        <SortByMenuContainer 
+          sortOption={this.state.sortOption}
+          onUpdateSortOption={this.handleUpdateSortOption} />
         <ImageGridContainer 
           beginSearch={this.state.beginSearch}
           isLoading={this.state.isLoading}

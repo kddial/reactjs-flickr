@@ -24,11 +24,13 @@ var helpers = {
         return err;
       });
   }, 
-  getFlickrPhotoSearch: function(value) {
+  getFlickrPhotoSearch: function(value, sortOption) {
     var url = flickrAddMethod("flickr.photos.search");
-    url = flickrAddArg(url, "tags", value); // tag search
+    url = flickrAddArg(url, "sort", sortOption); // sort option
     url = flickrAddArg(url, "text", value); // text search
+    url = flickrAddArg(url, "per_page", "50"); // 50 per page
 
+    console.log("Calling: " + url);
     return axios.get(url)
       .then(function(result) {
         return result;

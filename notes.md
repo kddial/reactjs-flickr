@@ -9,3 +9,9 @@ When you search for a term in the search bar, the grid view will show at least t
 Tapping each photo should take you to a separate view where you can view a larger version of the photo.
 
 In the main interface, create a dropdown somewhere where you can sort the image by Date (asc/desc) and other key indicators as you find appropriate.
+
+
+
+- sort images by {options}
+- display more info for each pic?
+- click on thumbnail for more info

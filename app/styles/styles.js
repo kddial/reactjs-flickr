@@ -4,6 +4,9 @@ var styles = {
   },
   space: {
     marginTop: '20px'
+  },
+  spaceBot: {
+    marginBottom: '50px',
   }
 };
 
